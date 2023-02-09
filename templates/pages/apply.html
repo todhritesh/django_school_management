@@ -3,18 +3,17 @@
 {% block title %}APPLY{% endblock title %}
 
 {% comment %} {% load crispy_forms_filters %}  {% endcomment %}
- {% load crispy_forms_tags %}
+<!-- {% load crispy_forms_tags %} -->
+<!-- {% load tailwind_filters %} -->
 
 {% block main %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <form action="" method="post" >
-                {% csrf_token %}
-                {{form | crispy}}
-                <input type="submit" value="SUBMIT FORM" class="btn btn-outline-primary w-100 my-3">
-            </form>
-        </div>
+<div class="w-screen">
+    <div class="container mx-auto flex justify-center">
+        <form class="min-w-[400px] flex gap-2 flex-col" action="" method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="SUBMIT FORM" class="bg-blue-600 text-white">
+        </form>
     </div>
 </div>
 {% endblock main %}

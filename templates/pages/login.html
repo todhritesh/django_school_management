@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}LOGIN{% endblock title %}
+{%load tailwind_filters%}
+{% block main %}
+<div class="w-screen">
+    <div class="container mx-auto flex justify-center">
+        <form class="min-w-[400px] flex flex-col gap-4" action="" method="post">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="text-xl bg-blue-500 p-2">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock main %}
