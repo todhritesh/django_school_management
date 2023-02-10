@@ -1,13 +1,13 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from .forms import StudentForm
+from .models import Student
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login as handleLogin , authenticate
+from django.contrib.auth import login as handleLogin , authenticate , logout as handleLogout
+from django.contrib.auth.decorators import login_required
 
 def home(req):
-    # return HttpResponse("hello")
-    return render(req, 'pages/home.html')
-    
+    return render(req, 'pages/home.html')    
 
 def login(req):
     form = AuthenticationForm(req , req.POST or None)
@@ -22,6 +22,7 @@ def login(req):
                 print("wrong")
     return render(req, 'pages/login.html',{"form":form})
 
+@login_required()
 def apply(req):
     try:
         context = {}
@@ -37,3 +38,12 @@ def apply(req):
     except Exception as e:
         return render(req, 'pages/apply.html',context)
 
+def logout(req):
+    handleLogout(req)
+    return redirect("login")
+
+@login_required()
+def applied_students(req):
+    context = {}
+    context['students'] = Student.objects.all()
+    return render(req, 'pages/applied_students.html',context)
