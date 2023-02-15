@@ -30,7 +30,7 @@ def apply(req):
         if req.method == 'POST' :
             if form.is_valid():
                 form.save()
-                redirect('apply')
+                return redirect('apply')
             else :
                 raise Exception("Someting Went wrong")
         context['form'] = StudentForm()
@@ -45,5 +45,48 @@ def logout(req):
 @login_required()
 def applied_students(req):
     context = {}
-    context['students'] = Student.objects.all()
+    if(req.GET.get('is_approved')=='true'):
+        context['students'] = Student.objects.filter(is_approved=True)
+    else :
+        context['students'] = Student.objects.filter(is_approved=False)
     return render(req, 'pages/applied_students.html',context)
+
+@login_required()
+def student_details(req,id):
+    context = {}
+    context['student'] = Student.objects.get(pk=id)
+    return render(req, 'pages/student_details.html',context)
+
+@login_required()
+def approve(req,id):
+    student = Student.objects.get(pk=id)
+    student.is_approved = True
+    student.save()
+    return redirect(req.META.get('HTTP_REFERER'))
+
+@login_required()
+def edit(req,id):
+    try:
+        student = Student.objects.get(pk=id)
+        if req.method == 'POST':
+            form = StudentForm(req.POST or None , req.FILES or None , instance=student)
+            if req.method == 'POST' :
+                if form.is_valid():
+                    form.save()
+                    return redirect('applied_students')
+                else :
+                    raise Exception("Someting Went wrong")
+        else:
+            form = StudentForm(instance=student)
+            context = {'form':form}
+            return render(req, 'pages/edit.html',context)   
+    except Exception as e:
+        return render(req, 'pages/edit.html',context)   
+
+@login_required()
+def delete(req,id):
+    try:
+        student = Student.objects.get(pk=id).delete()
+        return redirect("applied_students")
+    except Exception as e:
+        return render(req, 'pages/edit.html',context)   

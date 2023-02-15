@@ -26,13 +26,23 @@
                         <td class="whitespace-nowrap p-2 text-sm" >{{student.full_name}}</td>
                         <td class="whitespace-nowrap p-2 text-sm" >{{student.father_name}}</td>
                         <td class="whitespace-nowrap p-2 text-sm" >{{student.mother_name}}</td>
-                        <td class="whitespace-nowrap p-2 text-sm "  >{{student.address}}</td>
+                        <td class=" p-2 text-sm" >
+                            <div class="max-w-[300px] min-w-[200px]">{{student.address}}</div>
+                        </td>
                         <td class="whitespace-nowrap p-2 text-sm" >{{student.class_name}}</td>
                         <td class="whitespace-nowrap p-2 text-sm" >{{student.gender}}</td>
                         <td class="whitespace-nowrap p-2 text-sm" >{{student.dob}}</td>
                         <td class="whitespace-nowrap p-2 text-sm flex justify-center" >
-                            <a href="" class="text-md ">&#10004; </a>
-                            <a href="" class="text-md ">&#10006; </a>
+                            {%if student.is_approved == False %}
+                            <a href="{%url 'approve' id=student.id%}" class="text-md hover:bg-blue-500 rounded-full w-[30px] flex justify-center items-center h-[30px] p-1">&#10004; </a>
+                            {%endif%}
+                            <a href="{%url 'delete' id=student.id%}" class="text-md hover:bg-blue-500 rounded-full w-[30px] flex justify-center items-center h-[30px] p-1">&#10006; </a>
+                            <a href="{%url 'edit' id=student.id%}" class="text-md hover:bg-blue-500 rounded-full w-[30px] flex justify-center items-center h-[30px] p-1">
+                                <i class="fa-solid fa-pencil"></i>    
+                            </a>
+                            <a href="{%url 'student_details' id=student.id%}" class="text-md hover:bg-blue-500 rounded-full w-[30px] flex justify-center items-center h-[30px] p-1">
+                                <i class="fa-regular fa-eye"></i>
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

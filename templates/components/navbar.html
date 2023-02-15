@@ -1,11 +1,13 @@
-<nav class="w-screen p-6 bg-blue-600 flex justify-center">
+<nav id="nav" class="w-screen p-6 bg-blue-600 flex justify-center">
     <div class="container mx-auto flex sm:flex-row flex-col items-center flex-1">
-        <a href="" class="text-2xl text-white flex-1 mr-auto ">SCHOOL MANAGEMENT</a>
+      <button id="toggle_sidebar" class="flex justify-center" >
+        <i class="fa-sharp fa-solid fa-bars text-xl text-white"></i>
+      </button>
+        <a href="" class="text-2xl text-white flex-1 mr-auto ml-2">SCHOOL MANAGEMENT</a>
         <ul id="menu" class="flex gap-4 sm:flex-row flex-col sm:h-auto h-0 overflow-hidden duration-150 ease-out sm:transition-none transition-all justify-center">
-            <li><a href="{% url 'home' %}" class="text-white hover:text-gray-300 duration-150 sm-mt-0 mt-4">HOME</a></li>
+            <!-- <li><a href="{% url 'home' %}" class="text-white hover:text-gray-300 duration-150 sm-mt-0 mt-4">HOME</a></li> -->
             {% if user.is_authenticated  %}
-              <li><a href="{% url 'apply' %}" class="text-white hover:text-gray-300 duration-150">APPLY</a></li>
-              <li><a href="{% url 'applied_students' %}" class="text-white hover:text-gray-300 duration-150">APPLIED STUDENTS</a></li>
+              <li><a href="" class="text-white hover:text-gray-300 duration-150">HI {{user.username}}</a></li>
               <li><a href="{% url 'logout' %}" class="text-red-500 hover:text-red-600 duration-150">LOGOUT</a></li>
             {% else %}
               <li><a href="{% url 'login' %}" class="text-white hover:text-gray-300 duration-150">LOGIN</a></li>
@@ -20,6 +22,18 @@
     const menu = document.getElementById('menu')
     toggler.addEventListener('click',()=>{
         menu.classList.toggle('h-36')
+    })
+
+    
+    
+    // window
+    
+    const toggle_sidebar = document.getElementById('toggle_sidebar')
+    toggle_sidebar.addEventListener('click',()=>{
+      const sidebar = document.getElementById('sidebar')
+      sidebar.classList.toggle('min-w-[300px]')
+      // sidebar.classList.toggle('transition-all')
+      // sidebar.classList.add('bg-red-500')
     })
 </script>
 

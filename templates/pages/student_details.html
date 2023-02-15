@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}STUDENT DETAILS{% endblock title %}
+
+{% block main %}
+<div class="w-full">
+    <div class="container mx-auto flex justify-center">
+        <div class="max-w-[600px]">
+            <div class="p-2 shadow-lg flex flex-col rounded-lg">
+                <div class="flex justify-end gap-2">
+                    <a href="{%url 'edit' id=student.id%}" class="text-lg bg-blue-400 hover:bg-blue-500 hover:text-white duration-150 px-3 rounded py-1">Edit</a>
+                    <a href="" class="text-lg bg-blue-400 hover:bg-blue-500 hover:text-white duration-150 px-3 rounded py-1">Approve</a>
+                    <a href="{%url 'delete' id=student.id%}" class="text-lg bg-blue-400 hover:bg-blue-500 hover:text-white duration-150 px-3 rounded py-1">Delete</a>
+                </div>
+                <p class="text-md my-2">FULL NAME : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.full_name}}</span></p>
+                <p class="text-md my-2">FATHERS NAME : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.father_name}}</span></p>
+                <p class="text-md my-2">MOTHERS NAME : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.mother_name}}</span></p>
+                <p class="text-md my-2">ADDRESS : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.address}}</span></p>
+                <p class="text-md my-2">CITY : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.city}}</span></p>
+                <p class="text-md my-2">STATE : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.state}}</span></p>
+                <p class="text-md my-2">PIN CODE : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.pin_code}}</span></p>
+                <p class="text-md my-2">NATIONALITY : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.nationality}}</span></p>
+                <p class="text-md my-2">CONTACT : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.contact}}</span></p>
+                {%if student.image%}
+                <p class="text-md my-2">IMAGE : <img class="w-[200px] h-[200px] object-contain inline" src="{{student.image.url}}" /></p>
+                {%endif%}
+                <p class="text-md my-2">DATE OF BIRTH : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.dob}}</span></p>
+                <p class="text-md my-2">CLASS : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.class_name}}</span></p>
+                <p class="text-md my-2" >GENDER : <span class="underline underline-offset-2 decoration-1 decoration-blue-400">{{student.gender}}</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

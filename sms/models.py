@@ -49,6 +49,7 @@ class Student(models.Model):
     dob = models.DateField()
     gender = models.CharField(max_length=10,choices=GENDER)
     class_name = models.ForeignKey(Class, on_delete=models.CASCADE)
+    is_approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.full_name
