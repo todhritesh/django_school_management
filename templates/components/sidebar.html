@@ -2,10 +2,10 @@
     <div class="content p-2">
         <div class="header"></div>
         <ul class="list-group flex flex-col gap-2  text-white text-lg">
-            <li {%if request.get_full_path == '/applied_students/?is_approved=true' %} class="pl-2  bg-gray-200 text-black py-2" {%else%} class="list-item py-2 hover:text-black hover:bg-gray-200 duration-150 pl-2" {%endif%} ><a href="{%url 'applied_students'%}?is_approved=true">Approved Students</a></li>
-            <li {%if request.get_full_path == '/applied_students/?is_approved=false' %} class="pl-2  bg-gray-200 text-black py-2" {%else%} class="list-item py-2 hover:text-black hover:bg-gray-200 duration-150 pl-2" {%endif%}><a href="{%url 'applied_students'%}?is_approved=false">Unapproved Students</a></li>
-            <li {%if request.get_full_path == '/apply/' %} class="pl-2  bg-gray-200 text-black py-2" {%else%} class="list-item py-2 hover:text-black hover:bg-gray-200 duration-150 pl-2" {%endif%}><a href="{% url 'apply' %}">Apply</a></li>
-            <li class="pl-2  bg-red-500 text-white py-2" ><a href="{% url 'logout' %}">Logout</a></li>
+            <li {%if request.get_full_path == '/applied_students/?is_approved=true' %} class="pl-2  bg-gray-200 text-black py-2" {%else%} class="list-item py-2 hover:text-black hover:bg-gray-200 duration-150 pl-2" {%endif%} ><a class='block' href="{%url 'applied_students'%}?is_approved=true">Approved Students</a></li>
+            <li {%if request.get_full_path == '/applied_students/?is_approved=false' %} class="pl-2  bg-gray-200 text-black py-2" {%else%} class="list-item py-2 hover:text-black hover:bg-gray-200 duration-150 pl-2" {%endif%}><a class='block' href="{%url 'applied_students'%}?is_approved=false">Unapproved Students</a></li>
+            <li {%if request.get_full_path == '/apply/' %} class="pl-2  bg-gray-200 text-black py-2" {%else%} class="list-item py-2 hover:text-black hover:bg-gray-200 duration-150 pl-2" {%endif%}><a class='block' href="{% url 'apply' %}">Apply</a></li>
+            <li class="pl-2  bg-red-500 text-white py-2" ><a class="block" href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </div>
 </section>
