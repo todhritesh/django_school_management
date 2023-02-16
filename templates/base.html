@@ -41,7 +41,9 @@
 <body>
 
     {% include 'components/navbar.html' %}
-    {%include 'components/sidebar.html'%}
+    {%if user.is_authenticated%}
+        {%include 'components/sidebar.html'%}
+    {%endif%}
     <div class="my-5 py-2"></div>
     {% block main %}{% endblock main %}
     <div class="mb-3"></div>

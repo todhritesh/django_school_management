@@ -1,11 +1,11 @@
-<section id="sidebar" class="w-0 overflow-hidden bg-blue-600 min-h-[100vh] fixed backdrop-contrast-50" >
-    <div class="content p-2">
+<section id="sidebar" class="w-0 overflow-hidden bg-blue-600 min-h-[100vh] fixed" >
+    <div class="content p-2 flex flex-col">
         <div class="header"></div>
-        <ul class="list-group flex flex-col gap-2  text-white text-lg">
+        <ul class="list-group flex flex-col gap-2 text-white text-lg flex-1 flex-grow">
             <li {%if request.get_full_path == '/applied_students/?is_approved=true' %} class="pl-2  bg-gray-200 text-black py-2" {%else%} class="list-item py-2 hover:text-black hover:bg-gray-200 duration-150 pl-2" {%endif%} ><a class='block' href="{%url 'applied_students'%}?is_approved=true">Approved Students</a></li>
             <li {%if request.get_full_path == '/applied_students/?is_approved=false' %} class="pl-2  bg-gray-200 text-black py-2" {%else%} class="list-item py-2 hover:text-black hover:bg-gray-200 duration-150 pl-2" {%endif%}><a class='block' href="{%url 'applied_students'%}?is_approved=false">Unapproved Students</a></li>
             <li {%if request.get_full_path == '/apply/' %} class="pl-2  bg-gray-200 text-black py-2" {%else%} class="list-item py-2 hover:text-black hover:bg-gray-200 duration-150 pl-2" {%endif%}><a class='block' href="{% url 'apply' %}">Apply</a></li>
-            <li class="pl-2  bg-red-500 text-white py-2" ><a class="block" href="{% url 'logout' %}">Logout</a></li>
+            <li class="pl-2  bg-red-500 text-white py-2 flex-auto" ><a class="block" href="{% url 'logout' %}">Logout</a></li>
         </ul>
     </div>
 </section>

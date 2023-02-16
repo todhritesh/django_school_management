@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as handleLogin , authenticate , logout as handleLogout
 from django.contrib.auth.decorators import login_required
 
+@login_required()
 def home(req):
     return render(req, 'pages/home.html')    
 
