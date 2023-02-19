@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}MANAGE CLASS{% endblock title %}
+
+
+{% block main %}
+    <div class="w-screen">
+        <div class="container mx-auto flex md:flex-row flex-col md:items-start items-center gap-4">
+            <div class="w-11/12 md:w-7/12 overflow-auto" >
+                <table class="w-full" >
+                    <thead>
+                        <tr>
+                            <th class="text-start whitespace-nowrap py-2 border-2 px-4">#</th>
+                            <th class="text-start whitespace-nowrap py-2 border-2 px-4">Class</th>
+                            <th class="text-start whitespace-nowrap py-2 border-2 px-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for class in classes %}
+                        <tr>
+                            <td class="text-start whitespace-nowrap py-2 border-2 px-4 ">{{forloop.counter}}</td>
+                            <td class="text-start whitespace-nowrap py-2 border-2 px-4">{{class.name}}</td>
+                            <td class="text-start whitespace-nowrap py-1 border-2 px-4 flex justify-center">
+                                <a href="{%url 'applied_students'%}?filter={{class.name}}" class=" px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white duration-150" >View {{class.student_count}} Students</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="w-11/12 md:w-5/12" >
+                <form action="" class="flex flex-col gap-2" method="post">
+                    {%csrf_token%}
+                    {{class_form}}
+                    <input type="submit" value="ADD CLASS" class="py-2 px-4 bg-blue-500 hover:bg-blue-600 hover:text-gray-200 text-white duration-100">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

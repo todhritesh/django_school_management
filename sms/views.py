@@ -1,10 +1,11 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
-from .forms import StudentForm
-from .models import Student
+from .forms import StudentForm , ClassForm
+from .models import Student , Class
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as handleLogin , authenticate , logout as handleLogout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count , Q
 
 @login_required()
 def home(req):
@@ -48,6 +49,8 @@ def applied_students(req):
     context = {}
     if(req.GET.get('is_approved')=='true'):
         context['students'] = Student.objects.filter(is_approved=True)
+    elif(req.GET.get('filter') is not None):
+        context['students'] = Student.objects.filter(is_approved=True , class_name__name=req.GET.get('filter'))
     else :
         context['students'] = Student.objects.filter(is_approved=False)
     return render(req, 'pages/applied_students.html',context)
@@ -91,3 +94,16 @@ def delete(req,id):
         return redirect("applied_students")
     except Exception as e:
         return render(req, 'pages/edit.html',context)   
+
+
+def manage_class(req):
+    context = {}
+    class_form = ClassForm(req.POST or None)
+    if(req.method=='POST'):
+        if(class_form.is_valid() & len(Class.objects.filter(name=req.POST.get('name')))==0 ):
+            class_form.save()
+            class_form = ClassForm()
+    classes = Class.objects.annotate(student_count=Count("student",filter=Q(student__is_approved=True)))
+    context['classes'] = classes
+    context['class_form'] = class_form
+    return render(req, 'pages/class.html',context)
