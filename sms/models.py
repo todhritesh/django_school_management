@@ -50,6 +50,7 @@ class Student(models.Model):
     gender = models.CharField(max_length=10,choices=GENDER)
     class_name = models.ForeignKey(Class, on_delete=models.CASCADE)
     is_approved = models.BooleanField(default=False)
+    rf_code = models.CharField(max_length=50,null=True,unique=True)
 
     def __str__(self):
         return self.full_name

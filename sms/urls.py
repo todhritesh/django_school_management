@@ -7,6 +7,7 @@ urlpatterns = [
     path("accounts/login/",login,name="login"),
     path("accounts/logout/",logout,name="logout"),
     path("applied_students/",applied_students , name="applied_students"),
+    path("searched_student/",searched_student , name="searched_student"),
     path("student_details/<int:id>",student_details , name="student_details"),
     path("approve/<int:id>",approve , name="approve"),
     path("edit/<int:id>",edit , name="edit"),

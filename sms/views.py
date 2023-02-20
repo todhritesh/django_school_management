@@ -1,6 +1,6 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect , get_object_or_404
 from django.http import HttpResponse
-from .forms import StudentForm , ClassForm
+from .forms import StudentForm , ClassForm , EditStudentForm
 from .models import Student , Class
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as handleLogin , authenticate , logout as handleLogout
@@ -72,16 +72,20 @@ def approve(req,id):
 def edit(req,id):
     try:
         student = Student.objects.get(pk=id)
+        if(req.session.get('second_last_url') == None):
+            req.session['second_last_url'] = req.META.get('HTTP_REFERER')
         if req.method == 'POST':
-            form = StudentForm(req.POST or None , req.FILES or None , instance=student)
+            form = EditStudentForm(req.POST or None , req.FILES or None , instance=student)
             if req.method == 'POST' :
                 if form.is_valid():
                     form.save()
-                    return redirect('applied_students')
+                    second_last_url = req.session['second_last_url']
+                    del req.session['second_last_url']
+                    return redirect(second_last_url)
                 else :
                     raise Exception("Someting Went wrong")
         else:
-            form = StudentForm(instance=student)
+            form = EditStudentForm(instance=student)
             context = {'form':form}
             return render(req, 'pages/edit.html',context)   
     except Exception as e:
@@ -107,3 +111,14 @@ def manage_class(req):
     context['classes'] = classes
     context['class_form'] = class_form
     return render(req, 'pages/class.html',context)
+
+
+def searched_student(req):
+    try:
+        context={}
+        student = get_object_or_404(Student,rf_code=req.GET.get('search'))
+        context['student'] = student
+        return render(req, 'pages/searched_student.html',context)
+    except:
+        return redirect(req.META.get("HTTP_REFERER"))
+
