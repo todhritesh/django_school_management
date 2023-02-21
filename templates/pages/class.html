@@ -21,7 +21,7 @@
                             <td class="text-start whitespace-nowrap py-2 border-2 px-4 ">{{forloop.counter}}</td>
                             <td class="text-start whitespace-nowrap py-2 border-2 px-4">{{class.name}}</td>
                             <td class="text-start whitespace-nowrap py-1 border-2 px-4 flex justify-center">
-                                <a href="{%url 'applied_students'%}?filter={{class.name}}" class=" px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white duration-150" >View {{class.student_count}} Students</a>
+                                <a href="{%url 'applied_students'%}?filter={{class.name}}" class=" px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white duration-150" >TOTAL STUDENTS {{class.student_count}} </a>
                             </td>
                         </tr>
                         {% endfor %}
