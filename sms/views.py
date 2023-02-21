@@ -1,11 +1,12 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from django.http import HttpResponse
 from .forms import StudentForm , ClassForm , EditStudentForm
-from .models import Student , Class
+from .models import Student , Class , Payment , MONTHS
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as handleLogin , authenticate , logout as handleLogout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count , Q
+from datetime import datetime 
 
 @login_required()
 def home(req):
@@ -59,11 +60,17 @@ def applied_students(req):
 def student_details(req,id):
     context = {}
     context['student'] = Student.objects.get(pk=id)
+    context['payments'] = context['student'].payments.all()
     return render(req, 'pages/student_details.html',context)
 
 @login_required()
 def approve(req,id):
     student = Student.objects.get(pk=id)
+    payments = []
+    for i in range(datetime.now().month-1 , 12):
+        payments.append(Payment(student=student , amount=700 , month=MONTHS[i][0]))        
+
+    Payment.objects.bulk_create(payments)
     student.is_approved = True
     student.save()
     return redirect(req.META.get('HTTP_REFERER'))
@@ -118,6 +125,8 @@ def searched_student(req):
         context={}
         student = get_object_or_404(Student,rf_code=req.GET.get('search'))
         context['student'] = student
+        context['payments'] = student.payments.all()
+
         return render(req, 'pages/searched_student.html',context)
     except:
         return redirect(req.META.get("HTTP_REFERER"))

@@ -1,0 +1,29 @@
+<div class="p-2 shadow-lg flex flex-col rounded-lg">
+    <h1 class=" text-blue-700 text-start text-2xl">Fees</h1>
+    <div class="w-full overflow-auto">
+        <table class="w-full">
+            <thead>
+                <tr>
+                    <th class="p-1 text-start">#</th>
+                    <th class="p-1 text-start">Month</th>
+                    <th class="p-1 text-start">Amount</th>
+                    <th class="p-1 text-start">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                
+                    <tr >
+                        <td class="py-2 px-1 text-start">{{forloop.counter}}</td>
+                        <td class="py-2 px-1 text-start">{{payment.month|upper}}</td>
+                        <td class="py-2 px-1 text-start">{{payment.amount}}</td>
+                        <td class="py-2 px-1 text-start">
+                            <a href="" class="px-4 py-2 bg-blue-500 text-gray-100 rounded hover:text-white hover:bg-blue-600">PAY</a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

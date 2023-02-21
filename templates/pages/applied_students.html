@@ -4,11 +4,16 @@
 
 {% block main %}
 <div class="w-screen">
-        <div class="container mx-auto overflow-x-auto" >
+    {% if request.get_full_path == '/applied_students/?is_approved=true' %}
+    <form action="{%url 'searched_student'%}" class="flex justify-end my-2 px-2" >
+            <input autofocus class="ml-auto outline-none border-4 border-blue-200 py-0.5 pl-1" name="search" placeholder="Search with rf_code" />
+        </form>
+    {% endif %}
+        <div class="container px-2 mx-auto overflow-x-auto" >
             {% if request.get_full_path == '/applied_students/?is_approved=true' %}
-                <form action="{%url 'searched_student'%}" class="flex justify-end my-2" >
-                    <input autofocus class="ml-auto outline-none border-4 border-blue-200 py-0.5 pl-1" name="search" placeholder="Search with rf_code" />
-                </form>
+            <h1 class="my-2 text-blue-700" >APPROVED STUDENTS</h1>
+            {% else %}
+            <h1 class="my-2 text-blue-700" >UNAPPROVED STUDENTS</h1>
             {% endif %}
             <table class="w-full" >
                 <thead class=" bg-slate-600">

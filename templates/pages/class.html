@@ -5,8 +5,9 @@
 
 {% block main %}
     <div class="w-screen">
-        <div class="container mx-auto flex md:flex-row flex-col md:items-start items-center gap-4">
+        <div class="container px-2 mx-auto flex md:flex-row flex-col-reverse md:items-start items-center gap-4">
             <div class="w-11/12 md:w-7/12 overflow-auto" >
+                <h3 class="text-blue-700 my-2" >RUNNING CLASSES</h3>
                 <table class="w-full" >
                     <thead>
                         <tr>
@@ -29,6 +30,7 @@
                 </table>
             </div>
             <div class="w-11/12 md:w-5/12" >
+                <h3 class="text-blue-700 my-2">ADD CLASS</h3>
                 <form action="" class="flex flex-col gap-2" method="post">
                     {%csrf_token%}
                     {{class_form}}

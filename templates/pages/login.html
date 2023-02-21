@@ -4,11 +4,15 @@
 {%load tailwind_filters%}
 {% block main %}
 <div class="w-screen">
-    <div class="container mx-auto flex justify-center">
-        <form class="min-w-[400px] flex flex-col gap-4" action="" method="post">
+
+    <div class="container px-2 mx-auto">
+        <h1  class="text-blue-700 my-2">LOGIN FORM</h1>
+    </div>
+    <div class="container px-2 mx-auto flex justify-center">
+        <form class="max-w-[400px] min-w-[350px] flex flex-col gap-4" action="" method="post">
             {% csrf_token %}
             {{form|crispy}}
-            <button type="submit" class="text-xl text-gray-100 hover:text-white bg-blue-500 p-2">LOGIN</button>
+            <button type="submit" class="text-xl text-gray-100 hover:text-white bg-blue-500 py-1.5 rounded">LOGIN</button>
         </form>
     </div>
 </div>

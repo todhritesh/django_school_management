@@ -50,9 +50,34 @@ class Student(models.Model):
     gender = models.CharField(max_length=10,choices=GENDER)
     class_name = models.ForeignKey(Class, on_delete=models.CASCADE)
     is_approved = models.BooleanField(default=False)
-    rf_code = models.CharField(max_length=50,null=True,unique=True)
+    rf_code = models.CharField(max_length=50,null=True,unique=True,blank=True)
 
     def __str__(self):
         return self.full_name
+
+MONTHS = (
+    ("jan","jan"),
+    ("feb","feb"),
+    ("mar","mar"),
+    ("apr","apr"),
+    ("may","may"),
+    ("jun","jun"),
+    ("jul","jul"),
+    ("aug","aug"),
+    ("sept","sept"),
+    ("oct","oct"),
+    ("nov","nov"),
+    ("dec","dec")
+)
+
+class Payment(models.Model):
+    student = models.ForeignKey(Student, on_delete= models.CASCADE , related_name="payments")
+    amount = models.IntegerField(default=0 , null=True)
+    month = models.CharField(max_length=10,choices=MONTHS)
+    is_paid = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.student.full_name + " - " + self.month
+    
     
     
