@@ -17,7 +17,7 @@
                 <div class="flex justify-end gap-2">
                     <a href="{%url 'edit' id=student.id%}" class="text-lg text-gray-100  bg-blue-500 hover:text-white duration-150 px-3 rounded py-1">Edit</a>
                     {% if student.is_approved == False %}
-                        <a href="" class="text-lg text-gray-100  bg-blue-500 hover:text-white duration-150 px-3 rounded py-1">Approve</a>
+                        <a href="{%url 'approve' id=student.id%}" class="text-lg text-gray-100  bg-blue-500 hover:text-white duration-150 px-3 rounded py-1">Approve</a>
                     {% endif %}
                     <a href="{%url 'delete' id=student.id%}" class="text-lg hover:text-white bg-blue-500 text-gray-100 duration-150 px-3 rounded py-1">Delete</a>
                 </div>
